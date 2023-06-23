@@ -1,0 +1,30 @@
+footer{
+    width: 100%;
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 0px 10px;
+    margin-left: calc(var(--margin) + 30px);
+    transition: 0.5s;
+}
+
+.footer-content{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+.footer-content div{
+    color: #fff;
+
+}
+.footer-content div:hover{
+    color: #a8a8a8;
+}
+
+.footer-content a{
+    cursor: pointer;
+}

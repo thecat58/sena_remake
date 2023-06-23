@@ -1,0 +1,41 @@
+.export
+{
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb40a;
+  border-radius: 20px;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.import{
+  display: flex;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb40a;
+  border-radius: 20px;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* input#file-upload-button{
+  background: red;
+  color: red;
+} */
