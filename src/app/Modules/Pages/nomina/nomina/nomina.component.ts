@@ -15,13 +15,13 @@ export class NominaComponent {
   uploadingFile: boolean | undefined;
   fileToUpload: null | undefined;
   urlVista: string | undefined;
-  
+
 
   constructor(
     private _uiNotificationService: NotificationService,
     private _importarExcel: NominaService,
     private _descargarPDF: NominaService,
-    
+
   ) { }
 
 
@@ -62,14 +62,15 @@ export class NominaComponent {
   }
 
 
-
-  descargar(): void {
-    this._descargarPDF.descargarPDF().subscribe((data: Blob) => {
-      const url = window.URL.createObjectURL(data);
-      window.open(url, '_blank');
-    });
+  descargar() {
+    const url = 'http://127.0.0.1:8000/api/nominaReporte';
+    window.open(url);
   }
-  
+  descargar2() {
+    const url = 'http://127.0.0.1:8000/api/Reporte';
+    window.open(url);
+  }
+
 
 
 
