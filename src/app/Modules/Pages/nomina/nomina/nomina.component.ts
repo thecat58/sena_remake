@@ -20,7 +20,6 @@ export class NominaComponent {
   constructor(
     private _uiNotificationService: NotificationService,
     private _importarExcel: NominaService,
-    private _descargarPDF: NominaService,
 
   ) { }
 
@@ -38,19 +37,19 @@ export class NominaComponent {
     };
     reader.onprogress = (event) => {
       if (event.lengthComputable) {
-        this.progreso = Math.round((event.loaded / event.total) * 50);
+        this.progreso = Math.round((event.loaded / event.total) *48 );
       }
     };
     this._importarExcel.importarExcel(archivo).subscribe(
       response => {
         console.log(response);
-        this._uiNotificationService.showNotification({ message: "Ok! importación completada, ejecute el procedimiento", type: "success" });
+        this._uiNotificationService.showNotification({ message: "Ok! importación completada", type: "success" });
         this.cargandoArchivo = false;
 
       },
       error => {
         console.log(error);
-        this._uiNotificationService.showNotification({ message: "Upps! Ocurrio un error", type: "fail" });
+        this._uiNotificationService.showNotification({ message: "verifica la estructura de tu archivo ", type: "fail" });
         this.cargandoArchivo = false;
       }
     );
@@ -69,6 +68,10 @@ export class NominaComponent {
   descargar2() {
     const url = 'http://127.0.0.1:8000/api/Reporte';
     window.open(url);
+  }
+
+  generar(){
+    alert('ya puedes generar la certificacion')
   }
 
 
