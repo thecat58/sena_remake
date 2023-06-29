@@ -16,8 +16,7 @@ export class SearchBarService {
   searchArrayUpdate(data: Array<any>) {
     this.searchArrayService.next(data);
   }
-
-  getModelName(name: string, optionalName: string = ""){
-    this.getModel.next([name, optionalName])
+  getModelName(name: string, tableGetService: string){
+    this.getModel.next([name, tableGetService])
   }
 }

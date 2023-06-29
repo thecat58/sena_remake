@@ -15,6 +15,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { IconChartComponent } from './icon-chart/icon-chart.component';
 import { ExtendModalAlertComponent } from './extend-modal-alert/extend-modal-alert.component';
 import { ComponentsPipe } from '../components.pipe';
+import { IconChartSoleComponent } from './icon-chart-sole/icon-chart-sole.component';
+import { ElipseInformationComponent } from './elipse-information/elipse-information.component';
+import { RegularChartComponent } from './regular-chart/regular-chart.component';
+import { ChargeWheelSoleComponent } from './charge-wheel-sole/charge-wheel-sole.component';
+import { RegularChartSoleComponent } from './regular-chart-sole/regular-chart-sole.component';
+import { BoardTableComponent } from './board-table/board-table.component';
+import { BoardComponent } from './board/board.component';
+import { TableExtendInformationComponent } from './table-extend-information/table-extend-information.component';
 
 
 @NgModule({
@@ -27,7 +35,15 @@ import { ComponentsPipe } from '../components.pipe';
     ExtendModalAlertComponent,
     IconChartComponent,
     ComponentsPipe,
-    
+    IconChartSoleComponent,
+    ElipseInformationComponent,
+    RegularChartComponent,
+    ChargeWheelSoleComponent,
+    RegularChartSoleComponent,
+    BoardTableComponent,
+    BoardComponent,
+    TableExtendInformationComponent,
+    ChargeWheelComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +55,8 @@ import { ComponentsPipe } from '../components.pipe';
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    
 
   ],
   exports: [
@@ -48,6 +65,17 @@ import { ComponentsPipe } from '../components.pipe';
     ProgramaFormativoComponent,
     ExtendModalFormComponent,
     IconChartComponent,
+    IconChartSoleComponent,
+    ElipseInformationComponent,
+    ChargeWheelSoleComponent,
+    BoardTableComponent,
+    BoardComponent,
+    TableExtendInformationComponent,
+    ChargeWheelComponent, 
+    IconChartComponent,
+    IconChartSoleComponent,
+    ChargeWheelSoleComponent,
+    RegularChartComponent
   ],
   providers: [
     {

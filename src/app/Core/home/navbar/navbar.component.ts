@@ -33,8 +33,8 @@ export class NavbarComponent implements OnInit {
   filler: any;
   selectedMenuItem: string | null = "";
   searchTerm: string = "";
-  modelRef: string = "";
-  optionalModelRef: string = "";
+  searchGetService: string = "";
+  tableGetService: string = "";
 
   constructor(
     private toggleService: ServicioToggleService,
@@ -71,21 +71,18 @@ export class NavbarComponent implements OnInit {
         url: 'sede',
         icon: 'holiday_village'
       },
-
       {
-        name: 'Nomina',
-        url: 'nomina',
+        name: 'Grupos',
+        url: 'Grupos',
         icon: 'holiday_village'
       }
-
-
     ]
 
     this.filler = menu;
 
     this.searchBar.$getModel.subscribe(res => {
-      this.modelRef = res[0];
-      this.optionalModelRef = res[1];
+      this.searchGetService = res[0];
+      this.tableGetService = res[1];
       setTimeout(() => {
         this.engine()
       }, 1000);
@@ -146,7 +143,7 @@ export class NavbarComponent implements OnInit {
       this.adjustNavbar.Adjust_navbar("0");
       this.timeoutRef = setTimeout(() => {
         this.renderer2.removeClass(dropdown, "hide")
-      }, 450);
+      }, 300);
     }
     else {
       this.renderer2.addClass(dropdown, "show");
@@ -188,20 +185,26 @@ export class NavbarComponent implements OnInit {
 
     if (!this.searchTerm || this.searchTerm == "") {
 
-      this.coreService.get<any[]>(this.optionalModelRef).subscribe((response => {
+      this.coreService.get<any[]>(this.tableGetService).subscribe((response => {
         this.searchBar.searchArrayUpdate(response)
       }))
     }
     else {
-      this.coreService.pass<any>(this.modelRef, this.searchTerm)
-        .subscribe((response) => {
+      this.coreService.pass<any>(this.searchGetService, this.searchTerm).subscribe((response) => {
+
+        console.log("asdasd", Object.keys(response).length, response)
+        if (response.resultados) {
+          console.log("AAA", Object.keys(response).length, response);
+
           let resultados = response.resultados;
           let keys = Object.keys(resultados);
           let dato = keys.flatMap(key => resultados[Number(key)]);
           console.log(response);
-
           this.searchBar.searchArrayUpdate(dato);
-        });
+        }
+
+
+      });
     }
   }
 

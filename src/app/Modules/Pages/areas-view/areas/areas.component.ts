@@ -6,13 +6,15 @@ import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as $ from 'jquery';
 import 'slick-carousel';
+import { IconChartSoleComponent } from 'src/app/Modules/Components/icon-chart-sole/icon-chart-sole.component';
 import { ExtendModalFormComponent } from '../../../Components/extend-modal-form/extend-modal-form.component';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { AreasModalComponent } from '../areas-modal/areas-modal.component';
 import { ExtendModalFiller, incomeData } from 'src/app/shared/models/extend-modal-content';
 import { SearchBarService } from 'src/app/shared/services/search-bar.service';
-import { IconChart } from 'src/app/shared/models/icon-chart.model';
+import { IconChartFiller } from 'src/app/shared/models/icon-chart.model';
 import { ExtendModalAlertComponent } from 'src/app/Modules/Components/extend-modal-alert/extend-modal-alert.component';
+import { BoardTable, BoardTableFiller } from 'src/app/shared/models/board-table.model';
 
 
 @Component({
@@ -23,7 +25,6 @@ import { ExtendModalAlertComponent } from 'src/app/Modules/Components/extend-mod
 export class AreasComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('slickElement') slickElement!: ElementRef;
   protected cache: Map<number, { areas: AreaModel[] | null }> = new Map<number, { areas: AreaModel[] | null }>();
   protected showFormArea: boolean = false;
   protected formTitle: string = "";
@@ -32,20 +33,19 @@ export class AreasComponent implements OnInit, OnDestroy {
   displayet: AreaModel[] = []
   searchTerm: string = '';
   area: AreaModel | null = null;
-  view: Array<IconChart> = [];
-  areas: AreaModel[] = [];
+  view: Array<any> = [];
+  soleView: IconChartFiller = {} as IconChartFiller
   private subscription: Subscription | undefined;
   filler: ExtendModalFiller[] = [];
+  tableView: BoardTable = {} as BoardTable;
 
   constructor(
-
     //private dialogRef: MatDialogRef<AreasComponent>,
     //private modalRef: MatDialogRef<ExtendModalComponent>,
     private searchService: SearchBarService,
     private modal: MatDialog,
     private notificationService: NotificationService,
     private _areaService: AreaService,
-
   ) { }
 
 
@@ -57,23 +57,41 @@ export class AreasComponent implements OnInit, OnDestroy {
     this.searchService.getModelName("area", "areas")
 
     this.searchService.$searchArrayService.subscribe((res: any) => {
-      let view: IconChart[] = res.map((res: AreaModel) => ({
+      let view: IconChartFiller[] = res.map((res: AreaModel) => ({
         itemId: res.id || "",
         iconUrl: res.iconUrl,
         itemName: res.nombreArea,
-        itemOne: res.codigo
+        itemCode: res.codigo,
+        itemOne: res.codigo,
+        itemTwo: res.nombreArea,
+        itemThree: res.nombreArea,
+        itemEnfasis: res.id,
+        itemMessage: "Horas"
+        
       }
       ))
+      let as = new Date(2022, 1, 10);
+      let titles =  ["ID","Nombre de area", "Nombre de area", "Nombre de area", "Nombre de area", "Nombre de area", "Nombre de area", "Nombre de area", "Nombre de area"]
+      let tableView: BoardTableFiller[] = res.map((res:AreaModel) => ({
+        itemData: [res.id,res.nombreArea, res.iconUrl, res.nombreArea ,res.nombreArea, res.iconUrl, res.iconUrl, res.iconUrl, res.iconUrl],
+        itemId: res.id
+      }))
+      this.tableView  = {itemTitles:titles, itemData : tableView}
       this.view = view;
+      this.soleView = view[0]
+
+      
     });
 
+    
   }
 
-  Update(data: IconChart) {
-    console.log("lo que trae el coso", data.itemId);
+  Update(data: IconChartFiller) {
+    console.log("lo que trae el coso", data);
 
     this.filler = [{
       fieldName: "Nombre de Area",
+      type:"input",
       control: "text",
       dataPlacer: data.itemName,
       uppercase: true
@@ -84,23 +102,24 @@ export class AreasComponent implements OnInit, OnDestroy {
       dataPlacer: data.itemOne
     },
     {
-      fieldName: "Icono",
+      fieldName: "Icono asdasd asd aqwe ",
       control: "string",
       dataPlacer: data.iconUrl
     },
     {
       fieldName: "Icaono",
-      control: "date",
-      dataPlacer: data.iconUrl,
-      type: "textarea"
+      type: "input",
+      control: "date"
     }
     ]
 
     var pass: incomeData = {
-      filler: this.filler, title: "Actualizar area", update: true
+      filler: this.filler, title: "Actualizar area"
     }
 
     const dialogRef: MatDialogRef<ExtendModalFormComponent> = this.modal.open(ExtendModalFormComponent, { data: pass })
+    
+    
     dialogRef.afterClosed().subscribe(gets => {
       if (gets) {
         this.area = {
@@ -164,10 +183,7 @@ export class AreasComponent implements OnInit, OnDestroy {
     this.cache.set(0, { areas: null });
   }
 
-  destroySlider() {
-    console.log("destroy")
-    $(this.slickElement.nativeElement).slick('unslick')
-  }
+
 
   getAreas() {
 

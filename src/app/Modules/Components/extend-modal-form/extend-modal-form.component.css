@@ -8,11 +8,10 @@ div.mat-dialog-content{
     gap: 5px;
 }
 
-
-
 .form-body{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 15px;
 }
 
@@ -20,6 +19,7 @@ div.mat-dialog-content{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .mdc-dialog__title {
@@ -50,21 +50,10 @@ input.success{
 }
 
 
-.button-div button{
-    display: flex;
-    width: 30%;
-    justify-content: center;
-    align-items: center;
-    background-color: #006b00;
-    border-radius: 20px;
-    color: #fff;
-    border: none;
-    padding: 8px;
-    transition: 0.3s ;
-    cursor: pointer;
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
-
-
 
 .mat-mdc-dialog-actions {
     justify-content: space-around;

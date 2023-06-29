@@ -6,12 +6,6 @@ import { NotificationOptions } from '../models/notification-options.model';
   providedIn: 'root'
 })
 export class NotificationService {
-  error(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
-  success(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
 
   private notifyServe = new Subject();
   private clearnotifyServe = new Subject();

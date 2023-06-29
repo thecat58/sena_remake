@@ -4,6 +4,7 @@ import { FormControl, NgForm, FormBuilder, FormsModule, AbstractControl, NgModel
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ExtendModalFiller, incomeData } from 'src/app/shared/models/extend-modal-content';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { data } from 'jquery';
 
 
 @Component({
@@ -32,17 +33,11 @@ export class ExtendModalFormComponent {
 
   isFormComplete = true;
   ngOnInit() {
-
-
-    console.log(this.incomeData.filler);
-
     this.filler1 = this.incomeData.filler;
     this.extendModalTitle = this.incomeData.title || "title";
-    console.log("filler de arriva", this.filler1);
-
     this.filler = this.filler1.map(item => ({
       fieldName: item.fieldName || "",
-      placeholder: item.placeholder || "Ingrese" + item.fieldName,
+      placeholder: item.placeholder || "Ingrese " + item.fieldName,
       uppercase: item.uppercase || false,
       type: item.type || "input",
       control: item.control || "text",
@@ -50,7 +45,7 @@ export class ExtendModalFormComponent {
       ngModel: item.dataPlacer,
       UPCondition: item.uppercase || false,
       data: item.data || [{ data: "string", dataId: 2 }],
-
+      dataPlacer: item.dataPlacer || null
     }));
 
     if (this.incomeData.update) {
@@ -59,21 +54,16 @@ export class ExtendModalFormComponent {
       });
     }
 
-    this.formExtend = this.formBuilder.group({})
 
+    this.formExtend = this.formBuilder.group({})
     this.filler.forEach((item) => {
       this.formExtend.addControl(item.formControlName!, new FormControl('', Validators.required));
-      console.log("filler", this.filler);
-
     });
   }
 
   private getControl(name: string) {
     return this.formExtend.controls[name];
   }
-
-
-  /////////////////
 
   saveData() {
 
@@ -90,6 +80,16 @@ export class ExtendModalFormComponent {
     fill.ngModel = fill.ngModel!.toUpperCase();
 
   }
+
+  isSelected(dataplacer: string = "", id: number = 0): boolean {
+    if (dataplacer.toString() == id.toString()) {
+      console.log("sapo malparido", dataplacer, id); 
+      return true
+    }
+    else { console.log("sapo perro"); return false}
+  }
+  
+
 
 
 

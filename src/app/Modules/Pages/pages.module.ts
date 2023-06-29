@@ -13,8 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ComponentsPipe } from '../components.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { NominaComponent } from './nomina/nomina/nomina.component';
-import { NominaModalComponent } from './nomina/nomina-modal/nomina-modal.component';
+import { AreasTryComponent } from './areas-try/areas-try.component';
+import { GruposViewComponent } from './grupos-view/grupos-view.component';
 
 
 
@@ -24,8 +24,8 @@ import { NominaModalComponent } from './nomina/nomina-modal/nomina-modal.compone
     ProyectoFormativoModalComponent,
     AreasComponent,
     AreasModalComponent,
-    NominaComponent,
-    NominaModalComponent,
+    AreasTryComponent,
+    GruposViewComponent,
 
 
   ],

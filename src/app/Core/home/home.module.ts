@@ -28,7 +28,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HomeRoutingModule,
     ComponentsModule,
     PagesModule,
-    FormsModule,
+    FormsModule
   ],
   exports:[HomeComponent,
   NavbarComponent]

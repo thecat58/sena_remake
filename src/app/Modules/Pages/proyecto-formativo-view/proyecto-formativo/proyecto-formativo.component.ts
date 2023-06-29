@@ -106,8 +106,8 @@ export class ProyectoFormativoComponent {
           {
             fieldName: "Programa",
             type: "select",
-            data: this.dataFill
-
+            data: this.dataFill,
+       
 
           },  
           {
@@ -146,9 +146,6 @@ export class ProyectoFormativoComponent {
 
   openModalUpdate1(proyecto: ProyectoFormativoModel) {
     var dataPlacer: any = [proyecto.nombre, proyecto.codigo, proyecto.tiempoEstimado, proyecto.numeroTotalRaps, proyecto.idCentroFormacion]
-     
-
-    console.log("update",this.filler)
     var pass = { filler: this.filler, title: "Agregar proyecto formativo", update: true }
     const dialogRef: MatDialogRef<ExtendModalFormComponent> = this.dialog.open(ExtendModalFormComponent, { data: pass });
     this.proyecto = {} as ProyectoFormativoModel;
@@ -169,6 +166,8 @@ export class ProyectoFormativoComponent {
     this.ProyectoService.traerProyecto()
       .subscribe(proyecto => {
         this.proyectos = proyecto;
+        console.log("asd",proyecto);
+        
       }, error => {
         this.NotificationService.showNotification({ message: "Error de conexión" });
       });
@@ -217,13 +216,14 @@ export class ProyectoFormativoComponent {
     this.programaService.traerProgramas()
       .subscribe((programa: ProgramaModel[]) => {
         this.Programas = programa;
-        this.programaNames = this.Programas.map(programa => programa.nombrePrograma)
-        this.programaIds = this.Programas.map(programa => programa.id || "")
+        console.log(programa);
+        
 
-        this.dataFill = this.programaNames.map((item, index) => ({
-          data: item.toString(),
-          dataId: this.programaIds[index]
-        }));
+
+        this.dataFill = programa.map((res: ProgramaModel) =>({
+          data: res.nombrePrograma,
+          dataId: res.id
+        }))
 
         
         console.log(this.dataFill);
